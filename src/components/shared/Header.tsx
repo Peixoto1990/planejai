@@ -12,7 +12,7 @@ export function Header() {
     <header className="border-b border-(--border) px-3 py-3">
       <nav className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="bg-primary flex h-9 items-center justify-center rounded-full">
+          <div className="bg-primary flex h-9 items-center justify-center rounded-full px-2 py-2">
             <Wallet size={20} className="text-primary-foreground" />
           </div>
           <span className="text-lg">
