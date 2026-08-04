@@ -1,5 +1,6 @@
 import { Button } from '@/components/shared/Button';
 import { Input, type InputProps } from '@/components/shared/Input';
+import { formateCurrencyMask } from '@/utils/currency';
 import { ArrowLeft, ArrowRight, type LucideIcon } from 'lucide-react';
 import { useState, type SyntheticEvent } from 'react';
 
@@ -17,7 +18,7 @@ export interface FormStepProps {
 
 interface ActionsButtonsProps {
   onBack: () => void;
-  onNext: () => void;
+  onNext: (value: string) => void;
   hideBackButton?: boolean;
 }
 
@@ -38,7 +39,7 @@ export function FormStep({
 
     if (!inputValue) return;
 
-    onNext();
+    onNext(inputValue);
   };
   return (
     <div className="bg-card rounded-2xl p-6 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)] sm:p-8">
@@ -50,7 +51,15 @@ export function FormStep({
         {question}
       </h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <Input {...inputProps} value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+        <Input
+          {...inputProps}
+          value={inputValue}
+          onChange={(e) =>
+            setInputValue(
+              inputProps.prefix === 'R$' ? formateCurrencyMask(e.target.value) : e.target.value
+            )
+          }
+        />
         <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
           {!hideBackButton && (
             <Button
