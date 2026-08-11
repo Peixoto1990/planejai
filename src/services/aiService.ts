@@ -21,7 +21,7 @@ export interface InsightData {
     items: string[];
   };
   investment: {
-    content: string[];
+    items: string[];
   };
   motivation: {
     content: string;
