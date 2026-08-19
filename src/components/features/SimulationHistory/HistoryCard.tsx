@@ -36,7 +36,11 @@ export function HistoryCard({ data, deleteSimulation }: HistoryCardProps) {
       <div className="p-2 w-min rounded-2xl bg-primary-foreground">
         <GoalIcon className="text-primary" size={32} />
       </div>
-      <InfoItem variant="reverse" title={data.goalName} value="05-06-1990" />
+      <InfoItem
+        variant="reverse"
+        title={data.goalName}
+        value={new Date(data.createdAt).toLocaleDateString('pt-BR')}
+      />
       <InfoItem title="Custo da Meta" value={data.goalAmount} />
       <InfoItem title="Prazo" value={`${data.goalDeadline} meses`} />
       <InfoItem

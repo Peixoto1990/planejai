@@ -5,7 +5,7 @@ const LOCAL_STORAGE_KEY = 'simulation-data';
 export function useSimulationStorage() {
   const saveFormData = (formData: SimulationFormData) => {
     const id = crypto.randomUUID();
-    const record: SimulationRecord = { ...formData, id };
+    const record: SimulationRecord = { ...formData, id, createdAt: new Date().toISOString() };
     const storage = localStorage.getItem(LOCAL_STORAGE_KEY);
     const saveData = storage ? (JSON.parse(storage) as SimulationRecord[]) : [];
 
