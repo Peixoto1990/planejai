@@ -4,6 +4,7 @@ import type { ButtonHTMLAttributes } from 'react';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'primary' | 'secondary' | 'ghost';
   icon?: LucideIcon;
+  iconSize?: number;
 }
 
 const baseClasses =
@@ -15,10 +16,17 @@ const variantClasses: Record<ButtonProps['variant'], string> = {
   ghost: 'rounded-lg text-foreground',
 };
 
-export function Button({ variant, icon: Icon, children, className, ...props }: ButtonProps) {
+export function Button({
+  variant,
+  icon: Icon,
+  iconSize = 20,
+  children,
+  className,
+  ...props
+}: ButtonProps) {
   return (
     <button className={`${baseClasses} ${variantClasses[variant]} ${className || ''}`} {...props}>
-      {Icon && <Icon size={20} />}
+      {Icon && <Icon size={iconSize} />}
       {children}
     </button>
   );
