@@ -3,6 +3,7 @@ import type { PropsWithChildren } from 'react';
 
 interface ContentProps {
   insight: InsightData;
+  variant?: 'default' | 'print';
 }
 
 function Paragraph({ children }: PropsWithChildren) {
@@ -44,10 +45,18 @@ const statusStyles = {
   },
 };
 
-export function Content({ insight }: ContentProps) {
+const variantClasses = {
+  default: 'lg:max-h-93 lg:overflow-y-auto',
+  print: 'h-max',
+};
+
+export function Content({ insight, variant = 'default' }: ContentProps) {
   const status = statusStyles[insight.feasibility.status] ?? null;
+  const variantStyle = variantClasses[variant];
   return (
-    <div className="lg:scrollbar-thin lg:max-h-93 lg:overflow-y-auto lg:pr-2 lg:[scrollbar-color:var(--border)_transparent]">
+    <div
+      className={`lg:scrollbar-thin ${variantStyle} lg:pr-2 lg:[scrollbar-color:var(--border)_transparent]`}
+    >
       <section className="flex flex-col gap-2">
         <div className="flex flex-col items-start gap-2 sm:flex-row">
           <span className="text-foreground text-sm font-semibold">🎯 Viabilidade da Meta</span>
